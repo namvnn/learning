@@ -1,18 +1,10 @@
 .PHONY: fmt
-fmt: fmt-c fmt-rust
+fmt: fmt-c fmt-rs
 
 .PHONY: fmt-c
 fmt-c:
-	@echo "Formatting C projects..."
-	@find . -type f \
-		\( -name '*.c' -o -name '*.h' \) \
-		-not -path '*lib*' \
-		-not -path '*.git*' \
-		-exec clang-format -i {} '+'
+	@./scripts/fmt-c
 
-.PHONY: fmt-rust
-fmt-rust:
-	@echo "Formatting Rust projects..."
-	@for project in rustlings ; do \
-		cd "$${project}" && cargo fmt --all -- --config-path ../rustfmt.toml ; \
-    done
+.PHONY: fmt-rs
+fmt-rs:
+	@./scripts/fmt-rs

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo "[Rust] Formatting files..."
+
+projects=$(find . -type f -name 'Cargo.toml' -exec dirname {} ';')
+
+for project in ${projects}; do
+    cd "${project}" && cargo fmt --all -- --config-path ../rustfmt.toml
+done
+
+echo "[Rust] Done!"
