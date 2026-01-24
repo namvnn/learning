@@ -32,7 +32,8 @@ fn main() {
         //                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         let handle = thread::spawn(move || {
-            let sum: u32 = child_numbers.iter().filter(|&&n| n % 8 == offset).sum();
+            let sum: u32 =
+                child_numbers.iter().filter(|&&n| n % 8 == offset).sum();
             println!("Sum of offset {offset} is {sum}");
         });
 

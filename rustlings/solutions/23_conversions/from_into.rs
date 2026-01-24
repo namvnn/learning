@@ -23,7 +23,9 @@ impl Default for Person {
 impl From<&str> for Person {
     fn from(s: &str) -> Self {
         let mut split = s.split(',');
-        let (Some(name), Some(age), None) = (split.next(), split.next(), split.next()) else {
+        let (Some(name), Some(age), None) =
+            (split.next(), split.next(), split.next())
+        else {
             //                      ^^^^ there should be no third element
             return Self::default();
         };
