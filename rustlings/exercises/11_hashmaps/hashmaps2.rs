@@ -29,7 +29,7 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
     ];
 
     for fruit in fruit_kinds {
-         basket.entry(fruit).or_insert(1);
+        basket.entry(fruit).or_insert(1);
     }
 }
 

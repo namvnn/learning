@@ -24,7 +24,7 @@ impl ParsePosNonzeroError {
         Self::Creation(err)
     }
 
-    fn from_parse_int(err: ParseIntError) -> Self { 
+    fn from_parse_int(err: ParseIntError) -> Self {
         Self::ParseInt(err)
     }
 }

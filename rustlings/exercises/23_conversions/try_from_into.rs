@@ -30,10 +30,7 @@ impl TryFrom<(i16, i16, i16)> for Color {
     fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {
         let (red, green, blue) = tuple;
 
-        if !(0..=255).contains(&red)
-            || !(0..=255).contains(&green)
-            || !(0..=255).contains(&blue)
-        {
+        if !(0..=255).contains(&red) || !(0..=255).contains(&green) || !(0..=255).contains(&blue) {
             return Err(Self::Error::IntConversion);
         }
 

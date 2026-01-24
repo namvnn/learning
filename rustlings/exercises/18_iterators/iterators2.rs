@@ -15,7 +15,11 @@ fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 
 // ["hello", " ", "world"] -> "Hello World"
 fn capitalize_words_string(words: &[&str]) -> String {
-    words.iter().map(|word| capitalize_first(word)).collect::<Vec<_>>().join("")
+    words
+        .iter()
+        .map(|word| capitalize_first(word))
+        .collect::<Vec<_>>()
+        .join("")
 }
 
 fn main() {

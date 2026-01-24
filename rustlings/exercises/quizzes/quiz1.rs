@@ -9,11 +9,7 @@
 // entire order is reduced to only 1 rustbuck!
 
 fn calculate_price_of_apples(n: i64) -> i64 {
-    if n > 40 {
-        n
-    } else {
-        n * 2
-    }
+    if n > 40 { n } else { n * 2 }
 }
 
 fn main() {

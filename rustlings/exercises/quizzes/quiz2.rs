@@ -49,8 +49,8 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use super::my_module::transformer;
     use super::Command;
+    use super::my_module::transformer;
 
     #[test]
     fn it_works() {
