@@ -8,22 +8,19 @@ const unsigned int SCR_HEIGHT = 600;
 const char *vertex_shader_source = "#version 330 core\n"
                                    "layout (location = 0) in vec3 a_pos;\n"
                                    "void main() {\n"
-                                   "  gl_Position = vec4(a_pos.x, a_pos.y, "
-                                   "a_pos.z, 1.0);\n"
+                                   "  gl_Position = vec4(a_pos.x, a_pos.y, a_pos.z, 1.0);\n"
                                    "}\0";
 
 const char *orange_fragment_shader_source = "#version 330 core\n"
                                             "out vec4 frag_color;\n"
                                             "void main() {\n"
-                                            "  frag_color = vec4(1.0f, 0.5f, "
-                                            "0.2f, 1.0f);\n"
+                                            "  frag_color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
                                             "}\0";
 
 const char *yellow_fragment_shader_source = "#version 330 core\n"
                                             "out vec4 frag_color;\n"
                                             "void main() {\n"
-                                            "  frag_color = vec4(1.0f, 1.0f, "
-                                            "0.0f, 1.0f);\n"
+                                            "  frag_color = vec4(1.0f, 1.0f, 0.0f, 1.0f);\n"
                                             "}\0";
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -127,7 +124,7 @@ int main(void) {
     // set up vertex data (and buffer(s)) and configure vertex attributes
     float first_triangle[] = {
         -0.5f,  0.0f,  0.0f, // left
-        0.0f,   0.0f,  0.0f, // right
+         0.0f,  0.0f,  0.0f, // right
         -0.25f, 0.25f, 0.0f, // top
     };
     float second_triangle[] = {

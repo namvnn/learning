@@ -1,5 +1,5 @@
 CompileFlags:
   Add:
+    - -std=c99
     - -Ilib/glfw/include
     - -Ilib/glad/include
-
