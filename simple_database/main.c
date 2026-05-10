@@ -99,7 +99,7 @@ void execute_statement(struct statement *stm) {
     }
 }
 
-int main(int argc, char *argv[]) {
+int main() {
     struct input_buffer *inputbuf = new_input_buffer();
     struct statement stm;
 

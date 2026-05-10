@@ -96,9 +96,9 @@ int main(void) {
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     float vertices[] = {
-        0.5f, -0.5f, 0.0f, // bottom right
-       -0.5f, -0.5f, 0.0f, // bottom left
-        0.0f,  0.5f, 0.0f  // top
+        0.5f,  -0.5f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, // bottom left
+        0.0f,  0.5f,  0.0f  // top
     };
 
     unsigned int VBO, VAO;
@@ -131,7 +131,9 @@ int main(void) {
         // update the uniform color
         float time = glfwGetTime();
         float green = sin(time) / 2.0f + 0.5f;
-        int vertex_color_location = glGetUniformLocation(shader_program, "our_color");
+        int vertex_color_location = glGetUniformLocation(shader_program, "our_"
+                                                                         "colo"
+                                                                         "r");
         glUniform4f(vertex_color_location, 0.0f, green, 0.0f, 1.0f);
 
         // draw triangle
