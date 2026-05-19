@@ -12,6 +12,8 @@ enum meta_command_result {
 
 enum prepare_result {
     PREPARE_SUCCESS,
+    PREPARE_NEGATIVE_ID,
+    PREPARE_STRING_TOO_LONG,
     PREPARE_SYNTAX_ERROR,
     PREPARE_UNRECOGNIZED_STATEMENT,
 };
@@ -31,8 +33,8 @@ enum statement_type {
 
 struct row {
     uint32_t id;
-    char username[COLUMN_USERNAME_SIZE];
-    char email[COLUMN_EMAIL_SIZE];
+    char username[COLUMN_USERNAME_SIZE + 1];
+    char email[COLUMN_EMAIL_SIZE + 1];
 };
 
 const uint32_t ID_SIZE = SIZE_OF_ATTRIBUTE(struct row, id);
@@ -156,21 +158,46 @@ enum meta_command_result do_meta_command(struct input_buffer *inputbuf) {
     }
 }
 
+enum prepare_result prepare_insert(struct input_buffer *inputbuf,
+                                   struct statement *stm) {
+    int id;
+    char *id_string, *username, *email;
+
+    stm->type = STATEMENT_INSERT;
+
+    strtok(inputbuf->buffer, " ");
+    id_string = strtok(NULL, " ");
+    username = strtok(NULL, " ");
+    email = strtok(NULL, " ");
+
+    if (id_string == NULL || username == NULL || email == NULL) {
+        return PREPARE_SYNTAX_ERROR;
+    }
+
+    id = atoi(id_string);
+    if (id < 0) {
+        return PREPARE_NEGATIVE_ID;
+    }
+
+    if (strlen(username) > COLUMN_USERNAME_SIZE) {
+        return PREPARE_STRING_TOO_LONG;
+    }
+
+    if (strlen(email) > COLUMN_USERNAME_SIZE) {
+        return PREPARE_STRING_TOO_LONG;
+    }
+
+    stm->row_to_insert.id = id;
+    strcpy(stm->row_to_insert.username, username);
+    strcpy(stm->row_to_insert.email, email);
+
+    return PREPARE_SUCCESS;
+}
+
 enum prepare_result prepare_statement(struct input_buffer *inputbuf,
                                       struct statement *stm) {
-    int args_assigned;
-
     if (strncmp(inputbuf->buffer, "insert", 6) == 0) {
-        stm->type = STATEMENT_INSERT;
-
-        args_assigned = sscanf(
-            inputbuf->buffer, "insert %d %s %s", &(stm->row_to_insert.id),
-            stm->row_to_insert.username, stm->row_to_insert.email);
-        if (args_assigned < 3) {
-            return PREPARE_SYNTAX_ERROR;
-        }
-
-        return PREPARE_SUCCESS;
+        return prepare_insert(inputbuf, stm);
     }
 
     if (strcmp(inputbuf->buffer, "select") == 0) {
@@ -243,6 +270,14 @@ int main() {
         switch (prepare_statement(inputbuf, &stm)) {
             case PREPARE_SUCCESS: {
                 break;
+            }
+            case PREPARE_NEGATIVE_ID: {
+                printf("ID must be positive.\n");
+                continue;
+            }
+            case PREPARE_STRING_TOO_LONG: {
+                printf("String is too long.\n");
+                continue;
             }
             case PREPARE_SYNTAX_ERROR: {
                 printf("Syntax error. Could not parse statement.\n");
