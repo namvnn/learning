@@ -40,8 +40,7 @@ int main(void) {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
     // glfw: window creation
-    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL",
-                                          NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
     if (window == NULL) {
         printf("Failed to create GLFW window\n");
         // glfw: terminate, clearing all previously allocated GLFW resources.
@@ -110,8 +109,7 @@ int main(void) {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     // set the vertex attributes pointers
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
-                          (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
     // unbind the VBO safely as the call to glVertexAttribPointer registered VBO in VAO
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -131,9 +129,11 @@ int main(void) {
         // update the uniform color
         float time = glfwGetTime();
         float green = sin(time) / 2.0f + 0.5f;
-        int vertex_color_location = glGetUniformLocation(shader_program, "our_"
-                                                                         "colo"
-                                                                         "r");
+        int vertex_color_location = glGetUniformLocation(
+            shader_program, "our_"
+                            "colo"
+                            "r"
+        );
         glUniform4f(vertex_color_location, 0.0f, green, 0.0f, 1.0f);
 
         // draw triangle

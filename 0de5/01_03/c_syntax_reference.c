@@ -126,10 +126,9 @@ void arrays_and_strings() {
     // C strings are arrays of characters, terminated by a null character '�'.
 
     char string[6] = "hello"; // 6 characters, including the null terminator
-    int numbers1[5]; // This allocates the memory for 5 ints but does not clear it.
-    int numbers2[] = { 1, 2, 3, 4,
-                       5 }; // This allocates the memory for 5 ints and
-                            // initialises them.
+    int numbers1[5];          // This allocates the memory for 5 ints but does not clear it.
+    int numbers2[] = { 1, 2, 3, 4, 5 }; // This allocates the memory for 5 ints and
+                                        // initialises them.
 
     // You can't get far using C arrays without learning about pointers and memory.
     // But that's not for this file, so let's move on!
