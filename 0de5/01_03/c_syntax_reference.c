@@ -2,8 +2,8 @@
 
 // C's standard library is not built in to the language directly.
 // We need to include it as 'system libraries' like this.
-#include <stdio.h>  // stdio.h - Standard Input and Output (Header)
-#include <string.h> // string.h - String handling functions
+#include <stdio.h>   // stdio.h - Standard Input and Output (Header)
+#include <string.h>  // string.h - String handling functions
 
 // If we want to include our files or others provided, we can do this:
 // The contents of `lib.c` is then inlined into this file.
@@ -42,14 +42,16 @@ void printing() {
     // You can use printf to print strings with values interpolated
     printf("3 * 4 = %d\n", mul(3, 4));
     printf("Fibonacci number 10 is %d\n", fib(10));
-    // Format is the first argument, values to interpolate are the following arguments
+    // Format is the first argument, values to interpolate are the following
+    // arguments
 
     // Quick specifier reference:
     // %d - signed decimal integer (e.g. 99, -42)
     // %f - decimal floating point  (e.g. 3.14, -0.01)
     // %s - string (e.g. "hello")
     // %% - literal % (e.g. %)
-    // %p - pointer address (if given "hello" will print something like 0x7ffeefbff718)
+    // %p - pointer address (if given "hello" will print something like
+    // 0x7ffeefbff718)
     // \n - newline character, NOT automatically added to printf
 }
 
@@ -110,28 +112,30 @@ void conditionals() {
 void data_types() {
     int integer = 42;
     float decimal = 3.14;
-    char character = 'a'; // Typically 8 bits, enough to store an ASCII char
+    char character = 'a';  // Typically 8 bits, enough to store an ASCII char
     // There's no boolean type, use integers of 0 and 1 instead
 
     // You may see these around:
     size_t whatever = 100;
-    // This type is essentially "an unsigned integer big enough to store the size
-    // of, or reference to, any object in memory on this system".
+    // This type is essentially "an unsigned integer big enough to store the
+    // size of, or reference to, any object in memory on this system".
 }
 
 // === ARRAYS & STRINGS ===
 
 void arrays_and_strings() {
-    // C arrays & strings are a lot more basic than the lists you may be used to.
-    // C strings are arrays of characters, terminated by a null character '�'.
+    // C arrays & strings are a lot more basic than the lists you may be used
+    // to. C strings are arrays of characters, terminated by a null character
+    // '�'.
 
-    char string[6] = "hello"; // 6 characters, including the null terminator
-    int numbers1[5];          // This allocates the memory for 5 ints but does not clear it.
-    int numbers2[] = { 1, 2, 3, 4, 5 }; // This allocates the memory for 5 ints and
-                                        // initialises them.
+    char string[6] = "hello";  // 6 characters, including the null terminator
+    int numbers1[5];  // This allocates the memory for 5 ints but does not clear
+                      // it.
+    int numbers2[] = {1, 2, 3, 4, 5};  // This allocates the memory for 5 ints
+                                       // and initialises them.
 
-    // You can't get far using C arrays without learning about pointers and memory.
-    // But that's not for this file, so let's move on!
+    // You can't get far using C arrays without learning about pointers and
+    // memory. But that's not for this file, so let's move on!
 }
 
 // === STRUCTS ===
@@ -146,10 +150,10 @@ struct Person {
 
 void structs() {
     // You can then initialize them like this:
-    struct Person me = { "Kay", 176 };
+    struct Person me = {"Kay", 176};
 
     // Or like this:
-    struct Person you = { .height = 180, .name = "Someone" };
+    struct Person you = {.height = 180, .name = "Someone"};
 
     // And access the properties using the familiar dot notation:
     printf("Person %s, height %dcm\n", me.name, me.height);

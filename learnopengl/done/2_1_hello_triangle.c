@@ -1,30 +1,34 @@
-#include <stdio.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <stdio.h>
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-const char *vertex_shader_source = "#version 330 core\n"
-                                   "layout (location = 0) in vec3 a_pos;\n"
-                                   "void main() {\n"
-                                   "  gl_Position = vec4(a_pos.x, a_pos.y, "
-                                   "a_pos.z, 1.0);\n"
-                                   "}\0";
+const char *vertex_shader_source =
+    "#version 330 core\n"
+    "layout (location = 0) in vec3 a_pos;\n"
+    "void main() {\n"
+    "  gl_Position = vec4(a_pos.x, a_pos.y, "
+    "a_pos.z, 1.0);\n"
+    "}\0";
 
-const char *fragment_shader_source = "#version 330 core\n"
-                                     "out vec4 frag_color;\n"
-                                     "void main() {\n"
-                                     "  frag_color = vec4(1.0f, 0.5f, 0.2f, "
-                                     "1.0f);\n"
-                                     "}\0";
+const char *fragment_shader_source =
+    "#version 330 core\n"
+    "out vec4 frag_color;\n"
+    "void main() {\n"
+    "  frag_color = vec4(1.0f, 0.5f, 0.2f, "
+    "1.0f);\n"
+    "}\0";
 
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
+// glfw: whenever the window size changed (by OS or user resize) this callback
+// function executes
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
     glViewport(0, 0, width, height);
 }
 
-// glfw: process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
+// glfw: process all input: query GLFW whether relevant keys are
+// pressed/released this frame and react accordingly
 void process_input(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -40,7 +44,8 @@ int main(void) {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
     // glfw: window creation
-    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+    GLFWwindow *window =
+        glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
     if (window == NULL) {
         printf("Failed to create GLFW window\n");
         // glfw: terminate, clearing all previously allocated GLFW resources.
@@ -95,9 +100,9 @@ int main(void) {
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     float vertices[] = {
-        -0.5f, -0.5f, 0.0f, // left
-        0.5f,  -0.5f, 0.0f, // right
-        0.0f,  0.5f,  0.0f, // top
+        -0.5f, -0.5f, 0.0f,  // left
+        0.5f,  -0.5f, 0.0f,  // right
+        0.0f,  0.5f,  0.0f,  // top
     };
 
     unsigned int VBO, VAO;
@@ -110,13 +115,16 @@ int main(void) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     // set the vertex attributes pointers
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+                          (void *)0);
     glEnableVertexAttribArray(0);
 
-    // unbind the VBO safely as the call to glVertexAttribPointer registered VBO in VAO
+    // unbind the VBO safely as the call to glVertexAttribPointer registered VBO
+    // in VAO
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    // unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO
+    // unbind the VAO afterwards so other VAO calls won't accidentally modify
+    // this VAO
     glBindVertexArray(0);
 
     // render loop
@@ -133,7 +141,8 @@ int main(void) {
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+        // glfw: swap buffers and poll IO events (keys pressed/released, mouse
+        // moved etc.)
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

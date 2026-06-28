@@ -10,7 +10,8 @@ fn main() {
 mod tests {
     #[test]
     fn iterators() {
-        let my_fav_fruits = ["banana", "custard apple", "avocado", "peach", "raspberry"];
+        let my_fav_fruits =
+            ["banana", "custard apple", "avocado", "peach", "raspberry"];
 
         // Create an iterator over the array.
         let mut fav_fruits_iterator = my_fav_fruits.iter();

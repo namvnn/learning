@@ -30,7 +30,9 @@ impl FromStr for Person {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let mut split = s.split(',');
-        let (Some(name), Some(age), None) = (split.next(), split.next(), split.next()) else {
+        let (Some(name), Some(age), None) =
+            (split.next(), split.next(), split.next())
+        else {
             //                      ^^^^ there should be no third element
             return Err(ParsePersonError::BadLen);
         };

@@ -43,7 +43,9 @@ impl PositiveNonzeroInteger {
 
     fn parse(s: &str) -> Result<Self, ParsePosNonzeroError> {
         match s.parse() {
-            Ok(num) => Self::new(num).map_err(ParsePosNonzeroError::from_creation),
+            Ok(num) => {
+                Self::new(num).map_err(ParsePosNonzeroError::from_creation)
+            }
             Err(err) => Err(ParsePosNonzeroError::from_parse_int(err)),
         }
     }

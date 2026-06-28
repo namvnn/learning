@@ -43,7 +43,8 @@ mod tests {
 
     // Don't modify this function!
     fn get_fruit_basket() -> HashMap<Fruit, u32> {
-        let content = [(Fruit::Apple, 4), (Fruit::Mango, 2), (Fruit::Lychee, 5)];
+        let content =
+            [(Fruit::Apple, 4), (Fruit::Mango, 2), (Fruit::Lychee, 5)];
         HashMap::from_iter(content)
     }
 

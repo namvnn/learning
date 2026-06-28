@@ -10,7 +10,10 @@ struct OtherSoftware;
 impl Licensed for SomeSoftware {}
 impl Licensed for OtherSoftware {}
 
-fn compare_license_types<T: Licensed, U: Licensed>(software1: T, software2: U) -> bool {
+fn compare_license_types<T: Licensed, U: Licensed>(
+    software1: T,
+    software2: U,
+) -> bool {
     software1.licensing_info() == software2.licensing_info()
 }
 

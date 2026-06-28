@@ -48,7 +48,9 @@ impl State {
             Message::Resize { width, height } => self.resize(width, height),
             Message::Move(point) => self.move_position(point),
             Message::Echo(s) => self.echo(s),
-            Message::ChangeColor(red, green, blue) => self.change_color(red, green, blue),
+            Message::ChangeColor(red, green, blue) => {
+                self.change_color(red, green, blue)
+            }
             Message::Quit => self.quit(),
         }
     }
