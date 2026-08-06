@@ -9,3 +9,7 @@ target/
 tags
 *.a
 *.o
+
+# Clojure
+.nrepl-port
+.cpcache/
