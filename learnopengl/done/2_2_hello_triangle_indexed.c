@@ -98,6 +98,7 @@ int main(void) {
     glDeleteShader(vertex_shader);
     glDeleteShader(fragment_shader);
 
+    // clang-format off
     // set up vertex data (and buffer(s)) and configure vertex attributes
     float vertices[] = {
         0.5f,  0.5f,  0.0f,  // top right
@@ -108,6 +109,7 @@ int main(void) {
     unsigned int indices[] = {
         0, 1, 3, 1, 2, 3,
     };
+    // clang-format on
 
     unsigned int VBO, VAO, EBO;
     glGenVertexArrays(1, &VAO);
@@ -121,11 +123,17 @@ int main(void) {
 
     // copy our indcies array in an element buffer for OpenGL to use
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+                 sizeof(indices),
+                 indices,
                  GL_STATIC_DRAW);
 
     // set the vertex attributes pointers
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+    glVertexAttribPointer(0,
+                          3,
+                          GL_FLOAT,
+                          GL_FALSE,
+                          3 * sizeof(float),
                           (void *)0);
     glEnableVertexAttribArray(0);
 

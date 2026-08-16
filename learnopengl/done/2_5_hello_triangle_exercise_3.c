@@ -85,7 +85,9 @@ int main(void) {
 
     // fragment shaders
     unsigned int orange_fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(orange_fragment_shader, 1, &orange_fragment_shader_source,
+    glShaderSource(orange_fragment_shader,
+                   1,
+                   &orange_fragment_shader_source,
                    NULL);
     glCompileShader(orange_fragment_shader);
     glGetShaderiv(orange_fragment_shader, GL_COMPILE_STATUS, &success);
@@ -95,7 +97,9 @@ int main(void) {
     }
 
     unsigned int yellow_fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(yellow_fragment_shader, 1, &yellow_fragment_shader_source,
+    glShaderSource(yellow_fragment_shader,
+                   1,
+                   &yellow_fragment_shader_source,
                    NULL);
     glCompileShader(yellow_fragment_shader);
     glGetShaderiv(yellow_fragment_shader, GL_COMPILE_STATUS, &success);
@@ -129,6 +133,7 @@ int main(void) {
     glDeleteShader(vertex_shader);
     glDeleteShader(yellow_fragment_shader);
 
+    // clang-format off
     // set up vertex data (and buffer(s)) and configure vertex attributes
     float first_triangle[] = {
         -0.5f,  0.0f,  0.0f,  // left
@@ -141,6 +146,7 @@ int main(void) {
         0.5f,  0.0f,  0.0f,  // right
         0.25f, 0.25f, 0.0f,  // top
     };
+    // clang-format on
 
     unsigned int VBOs[2], VAOs[2];
     glGenVertexArrays(2, &VAOs);
@@ -150,10 +156,16 @@ int main(void) {
     glBindVertexArray(VAOs[0]);
     // copy our vertices array in a vertex buffer for OpenGL to use
     glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(first_triangle), first_triangle,
+    glBufferData(GL_ARRAY_BUFFER,
+                 sizeof(first_triangle),
+                 first_triangle,
                  GL_STATIC_DRAW);
     // set the vertex attributes pointers
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+    glVertexAttribPointer(0,
+                          3,
+                          GL_FLOAT,
+                          GL_FALSE,
+                          3 * sizeof(float),
                           (void *)0);
     glEnableVertexAttribArray(0);
     // unbind the VBO safely as the call to glVertexAttribPointer registered VBO
@@ -164,10 +176,16 @@ int main(void) {
     glBindVertexArray(VAOs[1]);
     // copy our vertices array in a vertex buffer for OpenGL to use
     glBindBuffer(GL_ARRAY_BUFFER, VBOs[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(second_triangle), second_triangle,
+    glBufferData(GL_ARRAY_BUFFER,
+                 sizeof(second_triangle),
+                 second_triangle,
                  GL_STATIC_DRAW);
     // set the vertex attributes pointers
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+    glVertexAttribPointer(0,
+                          3,
+                          GL_FLOAT,
+                          GL_FALSE,
+                          3 * sizeof(float),
                           (void *)0);
     glEnableVertexAttribArray(0);
     // unbind the VBO safely as the call to glVertexAttribPointer registered VBO

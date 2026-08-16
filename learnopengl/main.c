@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdio.h>
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -101,6 +102,7 @@ int main(void) {
     glDeleteShader(vertex_shader);
     glDeleteShader(fragment_shader);
 
+    // clang-format off
     // set up vertex data (and buffer(s)) and configure vertex attributes
     float vertices[] = {
         // positions        // colors
@@ -108,6 +110,7 @@ int main(void) {
         -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,  // bottom left
         0.0f,  0.5f,  0.0f, 0.0f, 0.0f, 1.0f,  // top
     };
+    // clang-format on
 
     unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);

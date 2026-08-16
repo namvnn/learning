@@ -1,7 +1,22 @@
 ---
 BasedOnStyle: Google
-AllowShortFunctionsOnASingleLine: None
+
+# Line breaking
 ColumnLimit: 80
+AllowAllArgumentsOnNextLine: false
+AllowShortFunctionsOnASingleLine: None
+BinPackArguments: false
+BinPackParameters: false
+
+# Indentation
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# Pointers
+PointerAlignment: Right
+
+# Includes
 IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^<glad/glad\.h>$'
@@ -15,8 +30,4 @@ IncludeCategories:
     SortPriority: 2
   - Regex: '^".*"$'
     Priority: 1
-IndentWidth: 4
-PointerAlignment: Right
-TabWidth: 4
-UseTab: Never
 ...

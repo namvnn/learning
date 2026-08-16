@@ -183,9 +183,11 @@ void *leaf_node_cell(void *node, uint32_t cell_num);
 uint32_t *leaf_node_key(void *node, uint32_t cell_num);
 void *leaf_node_value(void *node, uint32_t cell_num);
 void leaf_node_insert(struct cursor *cursor, uint32_t key, struct row *value);
-void leaf_node_split_and_insert(struct cursor *cursor, uint32_t key,
+void leaf_node_split_and_insert(struct cursor *cursor,
+                                uint32_t key,
                                 struct row *value);
-struct cursor *leaf_node_find(struct table *table, uint32_t page_num,
+struct cursor *leaf_node_find(struct table *table,
+                              uint32_t page_num,
                               uint32_t key);
 void initialize_internal_node(void *node);
 uint32_t *internal_node_num_keys(void *node);
@@ -194,12 +196,14 @@ uint32_t *internal_node_cell(void *node, uint32_t cell_num);
 uint32_t *internal_node_child(void *node, uint32_t child_num);
 uint32_t *internal_node_key(void *node, uint32_t key_num);
 uint32_t internal_node_find_child(void *node, uint32_t key);
-struct cursor *internal_node_find(struct table *table, uint32_t page_num,
+struct cursor *internal_node_find(struct table *table,
+                                  uint32_t page_num,
                                   uint32_t key);
 void internal_node_split_and_insert(struct table *table,
                                     uint32_t parent_page_num,
                                     uint32_t child_page_num);
-void internal_node_insert(struct table *table, uint32_t parent_page_num,
+void internal_node_insert(struct table *table,
+                          uint32_t parent_page_num,
                           uint32_t child_page_num);
 void update_internal_node_key(void *node, uint32_t old_key, uint32_t new_key);
 
@@ -215,7 +219,8 @@ uint32_t *node_parent(void *node);
 
 void indent(uint32_t level);
 void print_constants();
-void print_tree(struct pager *pager, uint32_t page_num,
+void print_tree(struct pager *pager,
+                uint32_t page_num,
                 uint32_t indentation_level);
 
 int main(int argc, char *argv[]) {
@@ -545,7 +550,8 @@ void *get_page(struct pager *pager, uint32_t page_num) {
     uint32_t num_pages;
 
     if (page_num > TABLE_MAX_PAGES) {
-        printf("Tried to fetch page number of bounds. %d > %d.\n", page_num,
+        printf("Tried to fetch page number of bounds. %d > %d.\n",
+               page_num,
                TABLE_MAX_PAGES);
         exit(EXIT_FAILURE);
     }
@@ -695,7 +701,8 @@ void leaf_node_insert(struct cursor *cursor, uint32_t key, struct row *value) {
 
     if (cursor->cell_num < num_cells) {
         for (i = num_cells; i > cursor->cell_num; i--) {
-            memcpy(leaf_node_cell(node, i), leaf_node_cell(node, i - 1),
+            memcpy(leaf_node_cell(node, i),
+                   leaf_node_cell(node, i - 1),
                    LEAF_NODE_CELL_SIZE);
         }
     }
@@ -705,7 +712,8 @@ void leaf_node_insert(struct cursor *cursor, uint32_t key, struct row *value) {
     serialize_row(value, leaf_node_value(node, cursor->cell_num));
 }
 
-void leaf_node_split_and_insert(struct cursor *cursor, uint32_t key,
+void leaf_node_split_and_insert(struct cursor *cursor,
+                                uint32_t key,
                                 struct row *value) {
     void *old_node = get_page(cursor->table->pager, cursor->page_num);
     uint32_t old_max = get_node_max_key(cursor->table->pager, old_node);
@@ -735,10 +743,12 @@ void leaf_node_split_and_insert(struct cursor *cursor, uint32_t key,
                           leaf_node_value(destination_node, index_within_node));
             *leaf_node_key(destination_node, index_within_node) = key;
         } else if (index > cursor->cell_num) {
-            memcpy(destination_node_cell, leaf_node_cell(old_node, index - 1),
+            memcpy(destination_node_cell,
+                   leaf_node_cell(old_node, index - 1),
                    LEAF_NODE_CELL_SIZE);
         } else {
-            memcpy(destination_node_cell, leaf_node_cell(old_node, index),
+            memcpy(destination_node_cell,
+                   leaf_node_cell(old_node, index),
                    LEAF_NODE_CELL_SIZE);
         }
 
@@ -764,7 +774,8 @@ void leaf_node_split_and_insert(struct cursor *cursor, uint32_t key,
     }
 }
 
-struct cursor *leaf_node_find(struct table *table, uint32_t page_num,
+struct cursor *leaf_node_find(struct table *table,
+                              uint32_t page_num,
                               uint32_t key) {
     void *node = get_page(table->pager, page_num);
     uint32_t num_cells = *leaf_node_num_cells(node);
@@ -833,7 +844,8 @@ uint32_t *internal_node_child(void *node, uint32_t child_num) {
     uint32_t num_keys = *internal_node_num_keys(node);
 
     if (child_num > num_keys) {
-        printf("Tried to access child_num %d > num_keys %d.\n", child_num,
+        printf("Tried to access child_num %d > num_keys %d.\n",
+               child_num,
                num_keys);
         exit(EXIT_FAILURE);
     } else if (child_num == num_keys) {
@@ -891,7 +903,8 @@ uint32_t internal_node_find_child(void *node, uint32_t key) {
     return min_index;
 }
 
-struct cursor *internal_node_find(struct table *table, uint32_t page_num,
+struct cursor *internal_node_find(struct table *table,
+                                  uint32_t page_num,
                                   uint32_t key) {
     void *node = get_page(table->pager, page_num);
     uint32_t child_index = internal_node_find_child(node, key);
@@ -940,7 +953,8 @@ void internal_node_split_and_insert(struct table *table,
     *internal_node_right_child(old_node) = INVALID_PAGE_NUM;
 
     for (uint32_t i = INTERNAL_NODE_MAX_KEYS - 1;
-         i > INTERNAL_NODE_MAX_KEYS / 2; i--) {
+         i > INTERNAL_NODE_MAX_KEYS / 2;
+         i--) {
         cur_page_num = *internal_node_child(old_node, i);
         cur = get_page(table->pager, cur_page_num);
 
@@ -961,7 +975,8 @@ void internal_node_split_and_insert(struct table *table,
     internal_node_insert(table, destination_page_num, child_page_num);
     *node_parent(child) = destination_page_num;
 
-    update_internal_node_key(parent, old_max,
+    update_internal_node_key(parent,
+                             old_max,
                              get_node_max_key(table->pager, old_node));
 
     if (!splitting_root) {
@@ -970,7 +985,8 @@ void internal_node_split_and_insert(struct table *table,
     }
 }
 
-void internal_node_insert(struct table *table, uint32_t parent_page_num,
+void internal_node_insert(struct table *table,
+                          uint32_t parent_page_num,
                           uint32_t child_page_num) {
     void *parent = get_page(table->pager, parent_page_num);
     void *child = get_page(table->pager, child_page_num);
@@ -1094,7 +1110,8 @@ void print_constants() {
     printf("LEAF_NODE_MAX_CELLS: %d\n", LEAF_NODE_MAX_CELLS);
 }
 
-void print_tree(struct pager *pager, uint32_t page_num,
+void print_tree(struct pager *pager,
+                uint32_t page_num,
                 uint32_t indentation_level) {
     void *node = get_page(pager, page_num);
     uint32_t num_keys, child, i;
