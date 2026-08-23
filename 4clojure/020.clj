@@ -1,7 +1,7 @@
-(defn get-penultimate [x] (first (rest (reverse x))))
+(defn m-penultimate [x] (first (rest (reverse x))))
 
-(= (get-penultimate (list 1 2 3 4 5)) 4)
+(= (m-penultimate (list 1 2 3 4 5)) 4)
 
-(= (get-penultimate ["a" "b" "c"]) "b")
+(= (m-penultimate ["a" "b" "c"]) "b")
 
-(= (get-penultimate [[1 2] [3 4]]) [1 2])
+(= (m-penultimate [[1 2] [3 4]]) [1 2])

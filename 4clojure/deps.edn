@@ -1,5 +1,5 @@
 {:aliases
- {:cider-clj {:extra-deps {org.clojure/clojure {:mvn/version "1.12.1"}
-                           cider/cider-nrepl {:mvn/version "0.62.2"}
-                           fipp/fipp {:mvn/version "0.6.29"}}
-              :main-opts ["-m" "nrepl.cmdline" "--interactive" "--middleware" "[cider.nrepl/cider-middleware]"]}}}
+ {:nrepl {:extra-deps {org.clojure/clojure {:mvn/version "1.12.1"}
+                       cider/cider-nrepl {:mvn/version "0.62.2"}
+                       fipp/fipp {:mvn/version "0.6.29"}}
+          :main-opts ["-m" "nrepl.cmdline" "--interactive" "--middleware" "[cider.nrepl/cider-middleware]"]}}}
