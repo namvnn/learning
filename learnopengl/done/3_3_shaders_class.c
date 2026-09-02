@@ -53,7 +53,7 @@ int main(void) {
     }
 
     // build and compile shader program
-    unsigned int shader_program = shader_create("shader.vs", "shader.fs");
+    unsigned int shader_program = shader_create("3_3_shader.vs", "3_3_shader.fs");
 
     // set up vertex_shader data (and buffer(s)) and configure vertex_shader attributes
     float vertices[] = {

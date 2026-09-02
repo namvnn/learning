@@ -100,7 +100,6 @@ int main(void) {
     glDeleteShader(vertex_shader);
     glDeleteShader(fragment_shader);
 
-    // clang-format off
     // set up vertex data (and buffer(s)) and configure vertex attributes
     float vertices[] = {
         // positions        // colors
@@ -108,7 +107,6 @@ int main(void) {
         -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,  // bottom left
         0.0f,  0.5f,  0.0f, 0.0f, 0.0f, 1.0f,  // top
     };
-    // clang-format on
 
     unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);
@@ -120,20 +118,12 @@ int main(void) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     // set position attribute
-    glVertexAttribPointer(0,
-                          3,
-                          GL_FLOAT,
-                          GL_FALSE,
-                          6 * sizeof(float),
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
                           (void *)0);
     glEnableVertexAttribArray(0);
 
     // set color attribute
-    glVertexAttribPointer(1,
-                          3,
-                          GL_FLOAT,
-                          GL_FALSE,
-                          6 * sizeof(float),
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
                           (void *)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 

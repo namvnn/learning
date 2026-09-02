@@ -3,10 +3,7 @@ BasedOnStyle: Google
 
 # Line breaking
 ColumnLimit: 80
-AllowAllArgumentsOnNextLine: false
 AllowShortFunctionsOnASingleLine: None
-BinPackArguments: false
-BinPackParameters: false
 
 # Indentation
 IndentWidth: 4
