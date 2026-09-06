@@ -1,6 +1,6 @@
-(defn m-count [x] (if (empty? x)
-                    0
-                    (+ 1 (m-count (rest x)))))
+(defn m-count [x]
+  (if (empty? x) 0
+    (+ 1 (m-count (rest x)))))
 
 (= (m-count '(1 2 3 3 1)) 5)
 
