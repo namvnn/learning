@@ -1,9 +1,13 @@
 (defn m-prime [c]
-  (defn m-is-prime? [n]
-    (cond
-      (or (= n 0) (= n 1)) false
-      :else (= '(1) (filter #(= 0 (mod n %)) (range 1 n)))))
-  (take c (filter m-is-prime? (range))))
+  (letfn [(is-prime? [x]
+                     (if (< x 2)
+                       false
+                       (loop [i 2]
+                         (cond
+                           (< x (* i i)) true
+                           (= 0 (mod x i)) false
+                           :else (recur (inc i))))))]
+    (take c (filter is-prime? (range)))))
 
 (= (m-prime 2) [2 3])
 
