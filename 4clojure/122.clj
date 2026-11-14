@@ -2,7 +2,7 @@
   (loop [q x
          l '()]
     (if (< q 2)
-      (conj l 1)
+      (conj l q)
       (recur (quot q 2) (conj l (mod q 2))))))
 
 (defn m-to-decimal [s]
